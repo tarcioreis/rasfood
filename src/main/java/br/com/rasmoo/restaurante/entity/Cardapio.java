@@ -15,6 +15,9 @@ public class Cardapio {
     private String descricao;
     private Boolean disponivel;
     private BigDecimal valor;
+
+    // Muitos produtos desse cardápio podem ter uma categoria
+    @ManyToOne
     private Categoria categoria;
 
     @Column(name = "data_de_registro")
