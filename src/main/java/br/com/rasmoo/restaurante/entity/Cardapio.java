@@ -15,6 +15,7 @@ public class Cardapio {
     private String descricao;
     private Boolean disponivel;
     private BigDecimal valor;
+    private Categoria categoria;
 
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
