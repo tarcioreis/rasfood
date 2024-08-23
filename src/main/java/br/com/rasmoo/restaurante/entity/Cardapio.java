@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pratos")
-public class Prato {
+public class Cardapio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Prato {
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
-    public Prato() {
+    public Cardapio() {
 
     }
 
