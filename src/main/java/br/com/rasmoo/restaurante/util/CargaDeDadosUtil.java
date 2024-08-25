@@ -60,7 +60,7 @@ public class CargaDeDadosUtil {
                 true, BigDecimal.valueOf(10), categorias.get(2));
 
         Cardapio amstel = new Cardapio("Cerveja Amstel", "Cerveja Amstel lata 350ml", true,
-                BigDecimal.valueOf(4.50), categorias.get(3));
+                BigDecimal.valueOf(7.50), categorias.get(3));
 
         Cardapio cocaCola = new Cardapio("Coca-Cola", "Coca-Cola zero 1,5l", true,
                 BigDecimal.valueOf(7.50), categorias.get(3));
@@ -74,7 +74,7 @@ public class CargaDeDadosUtil {
         cardapioDao.cadastrar(cocaCola);
 
         entityManager.getTransaction().commit();
-        cardapioDao.consultaJpql().forEach(entidade -> System.out.println("Entidade consultada: " + entidade));
+        //cardapioDao.consultaJpql().forEach(entidade -> System.out.println("Entidade consultada: " + entidade));
 
         entityManager.clear();
     }

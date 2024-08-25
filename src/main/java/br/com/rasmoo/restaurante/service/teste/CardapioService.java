@@ -1,5 +1,6 @@
 package br.com.rasmoo.restaurante.service.teste;
 
+import br.com.rasmoo.restaurante.dao.CardapioDao;
 import br.com.rasmoo.restaurante.util.CargaDeDadosUtil;
 import br.com.rasmoo.restaurante.util.JPAUtil;
 
@@ -12,6 +13,10 @@ public class CardapioService {
         EntityManager entityManager = JPAUtil.getEntityManagerRasfood();
         CargaDeDadosUtil.cadastrarCategoria(entityManager);
         CargaDeDadosUtil.cadastrarProdutosCardapio(entityManager);
+        CardapioDao cardapioDao = new CardapioDao(entityManager);
+
+        System.out.println("Entidades com o mesmo valor: " +
+                cardapioDao.consultarPorPreco(BigDecimal.valueOf(7.50)));
         entityManager.close();
     }
 
