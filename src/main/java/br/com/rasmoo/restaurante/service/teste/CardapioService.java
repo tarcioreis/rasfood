@@ -15,8 +15,10 @@ public class CardapioService {
         CargaDeDadosUtil.cadastrarProdutosCardapio(entityManager);
         CardapioDao cardapioDao = new CardapioDao(entityManager);
 
-        System.out.println("Entidades com o mesmo valor: " +
-                cardapioDao.consultarPorPreco(BigDecimal.valueOf(7.50)));
+        //System.out.println("Entidades com o mesmo valor: " +
+                //cardapioDao.consultarPorPreco(BigDecimal.valueOf(7.50)));
+
+        System.out.println("Entidade consultada: " + cardapioDao.consultarPorNome("Lasanha quatro quejos"));
         entityManager.close();
     }
 
