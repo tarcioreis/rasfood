@@ -34,8 +34,8 @@ public class CardapioDao {
 
     public List<Cardapio> consultarPorPreco(BigDecimal filtro) {
         try {
-        String jpql = "SELECT c FROM Cardapio c WHERE c.valor = :valor";
-        return this.entityManager.createQuery(jpql, Cardapio.class).setParameter("valor", filtro).getResultList();
+            String jpql = "SELECT c FROM Cardapio c WHERE c.valor = :valor";
+            return this.entityManager.createQuery(jpql, Cardapio.class).setParameter("valor", filtro).getResultList();
         } catch (Exception e) {
             return Collections.emptyList();
         }
@@ -43,8 +43,8 @@ public class CardapioDao {
 
     public Cardapio consultarPorNome(String filtro) {
         try {
-        String jpql = "SELECT c FROM Cardapio c WHERE UPPER(c.nome) = UPPER(:nome)";
-        return this.entityManager.createQuery(jpql, Cardapio.class).setParameter("nome", filtro).getSingleResult();
+            String jpql = "SELECT c FROM Cardapio c WHERE UPPER(c.nome) = UPPER(:nome)";
+            return this.entityManager.createQuery(jpql, Cardapio.class).setParameter("nome", filtro).getSingleResult();
         } catch (Exception e) {
             return null;
         }
