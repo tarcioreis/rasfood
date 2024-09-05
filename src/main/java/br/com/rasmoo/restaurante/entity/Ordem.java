@@ -3,6 +3,7 @@ package br.com.rasmoo.restaurante.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "ordens")
@@ -16,17 +17,17 @@ public class Ordem {
     private BigDecimal valorTotal;
 
     @Column(name = "data_de_criacao")
-    private LocalDateTime dataDeCriacao;
+    private LocalDateTime dataDeCriacao = LocalDateTime.now();
 
     @ManyToOne
     private Cliente cliente;
 
+    @OneToMany
+    private List<OrdensCardapio> ordensCardapioList;
+
     public Ordem() {}
 
-    public Ordem(Integer id, BigDecimal valorTotal, LocalDateTime dataDeCriacao, Cliente cliente) {
-        this.id = id;
-        this.valorTotal = valorTotal;
-        this.dataDeCriacao = dataDeCriacao;
+    public Ordem(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -48,10 +49,6 @@ public class Ordem {
 
     public LocalDateTime getDataDeCriacao() {
         return dataDeCriacao;
-    }
-
-    public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
-        this.dataDeCriacao = dataDeCriacao;
     }
 
     public Cliente getCliente() {
