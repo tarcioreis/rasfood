@@ -13,10 +13,10 @@ public class OrdensCardapio {
     private Integer id;
 
     @ManyToOne
-    private Cardapio cardapio_id;
+    private Cardapio cardapio;
 
     @ManyToOne
-    private Ordem ordensCardapio_id;
+    private Ordem ordem;
 
     private BigDecimal valor;
 
@@ -24,11 +24,11 @@ public class OrdensCardapio {
 
     public OrdensCardapio() {}
 
-    public OrdensCardapio(Integer id, Cardapio cardapio_id, Ordem ordensCardapio_id, BigDecimal valor) {
-        this.id = id;
-        this.cardapio_id = cardapio_id;
-        this.ordensCardapio_id = ordensCardapio_id;
-        this.valor = valor;
+    public OrdensCardapio(Ordem ordem, Cardapio cardapio, Integer quantidade) {
+        this.ordem = ordem;
+        this.cardapio = cardapio;
+        this.quantidade = quantidade;
+        this.valor = cardapio.getValor();
     }
 
     public Integer getId() {
@@ -39,20 +39,20 @@ public class OrdensCardapio {
         this.id = id;
     }
 
-    public Cardapio getCardapio_id() {
-        return cardapio_id;
+    public Cardapio getCardapio() {
+        return cardapio;
     }
 
-    public void setCardapio_id(Cardapio cardapio_id) {
-        this.cardapio_id = cardapio_id;
+    public void setCardapio(Cardapio cardapio) {
+        this.cardapio = cardapio;
     }
 
-    public Ordem getOrdensCardapio_id() {
-        return ordensCardapio_id;
+    public Ordem getOrdem() {
+        return ordem;
     }
 
-    public void setOrdensCardapio_id(Ordem ordensCardapio_id) {
-        this.ordensCardapio_id = ordensCardapio_id;
+    public void setOrdem(Ordem ordem) {
+        this.ordem = ordem;
     }
 
     public BigDecimal getValor() {
@@ -75,8 +75,8 @@ public class OrdensCardapio {
     public String toString() {
         return "OrdensCardapio{" +
                 "id=" + id +
-                ", cardapio_id=" + cardapio_id +
-                ", ordensCardapio=" + ordensCardapio_id +
+                ", cardapio_id=" + cardapio +
+                ", ordensCardapio=" + ordem +
                 ", valor=" + valor +
                 ", quantidade=" + quantidade +
                 '}';

@@ -73,7 +73,7 @@ public class CargaDeDadosUtil {
         cardapioDao.cadastrar(amstel);
         cardapioDao.cadastrar(cocaCola);
 
-        entityManager.getTransaction().commit();
+        entityManager.flush();
         //cardapioDao.consultaJpql().forEach(entidade -> System.out.println("Entidade consultada: " + entidade));
 
         entityManager.clear();
