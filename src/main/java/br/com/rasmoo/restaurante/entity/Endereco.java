@@ -16,6 +16,9 @@ public class Endereco {
     private String cep;
     private String estado;
 
+    @ManyToOne
+    private Cliente cliente;
+
     public Endereco() {
 
     }
@@ -61,6 +64,14 @@ public class Endereco {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
