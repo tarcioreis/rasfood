@@ -52,6 +52,7 @@ public class Cliente {
         return "Cliente{" +
                 "cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
+                ", enderecoList=" + enderecoList +
                 '}';
     }
 }

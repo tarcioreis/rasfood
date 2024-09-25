@@ -18,7 +18,7 @@ public class Cardapio {
     private BigDecimal valor;
 
     // Muitos produtos desse cardápio podem ter uma categoria
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     @Column(name = "data_de_registro")

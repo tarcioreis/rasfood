@@ -1,5 +1,6 @@
 package br.com.rasmoo.restaurante.dao;
 
+import br.com.rasmoo.restaurante.entity.Cliente;
 import br.com.rasmoo.restaurante.entity.Ordem;
 import br.com.rasmoo.restaurante.vo.ItensPrincipaisVo;
 
@@ -14,12 +15,18 @@ public class OrdemDao {
         this.entityManager = entityManager;
     }
 
-    public void cadastrar(Ordem ordem) {
+    public void cadastrar(final Ordem ordem) {
         this.entityManager.persist(ordem);
     }
 
-    public Ordem consultarPorId(Integer id) {
+    public Ordem consultarPorId(final Integer id) {
         return this.entityManager.find(Ordem.class, id);
+    }
+
+    // consulta eager sem alterar a propriedade LAZY do FetchType
+    public Ordem joinFetchCliente(final Integer filtro_id) {
+        String jpql = "SELECT o FROM Ordem o JOIN FETCH o.cliente WHERE o.id = :id";
+        return this.entityManager.createQuery(jpql, Ordem.class).setParameter("id", filtro_id).getSingleResult();
     }
 
     public List<ItensPrincipaisVo> consultarMaisVendidos() {
