@@ -28,7 +28,7 @@ public class OrdemService {
         //System.out.println(ordemDao.consultarMaisVendidos());
         //System.out.println(clienteDao.consultarTodos());
         EnderecoDao enderecoDao = new EnderecoDao(entityManager);
-        System.out.println(enderecoDao.consultarPorId(1));
+        System.out.println(enderecoDao.consultaDinamica("Rio grande", "Irecê", "Bahia"));
         entityManager.getTransaction().commit();
         entityManager.close();
         //System.out.println(ordem.getCliente().getNome());

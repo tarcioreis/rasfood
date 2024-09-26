@@ -14,6 +14,7 @@ public class Endereco {
     private String rua;
     private String complemento;
     private String cep;
+    private String cidade;
     private String estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,10 +24,11 @@ public class Endereco {
 
     }
 
-    public Endereco(String rua, String complemento, String cep, String estado) {
+    public Endereco(String rua, String complemento, String cep, String cidade, String estado) {
         this.rua = rua;
         this.complemento = complemento;
         this.cep = cep;
+        this.cidade = cidade;
         this.estado = estado;
     }
 
@@ -58,6 +60,14 @@ public class Endereco {
         this.cep = cep;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -81,7 +91,9 @@ public class Endereco {
                 ", rua='" + rua + '\'' +
                 ", complemento='" + complemento + '\'' +
                 ", cep='" + cep + '\'' +
+                ", cidade='" + cidade + '\'' +
                 ", estado='" + estado + '\'' +
+
                 '}';
     }
 }

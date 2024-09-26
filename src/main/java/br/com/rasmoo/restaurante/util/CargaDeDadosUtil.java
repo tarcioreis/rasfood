@@ -82,19 +82,19 @@ public class CargaDeDadosUtil {
 
         Cliente tarcio = new Cliente("12345678900", "Tarcio Souza Reis");
         tarcio.addEnderecosCliente(new Endereco("Rio grande", "Igreja presbiteriana",
-                "000000", "Bahia"));
+                "000000", "Irecê", "Bahia"));
 
         Cliente pedro = new Cliente("321456987", "Pedro da Silva");
         pedro.addEnderecosCliente(new Endereco("Rua da delegacia", "complemento",
-                "1234556", "São Paulo"));
+                "1234556", "Campinas","São Paulo"));
 
         Cliente vanessa = new Cliente("098765364", "Vanessa Lima Santos");
         vanessa.addEnderecosCliente(new Endereco("Rua das árvores", "Praça da cidade",
-                "987455", "Minas Gerais"));
+                "987455", "Belo Horizonte","Minas Gerais"));
 
         Cliente mariana = new Cliente("789139740", "Mariana Lima Santos");
         mariana.addEnderecosCliente(new Endereco("Rua das árvores", "Praça da cidade",
-                "987455", "Minas Gerais"));
+                "987455", "Timoteo", "Minas Gerais"));
 
         ClienteDao clienteDao = new ClienteDao(entityManager);
         clienteDao.cadastrar(tarcio);
