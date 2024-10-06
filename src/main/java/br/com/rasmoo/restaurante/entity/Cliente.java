@@ -1,5 +1,7 @@
 package br.com.rasmoo.restaurante.entity;
 
+import br.com.rasmoo.restaurante.embeddable.Contato;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,9 @@ public class Cliente {
     @Id
     private String cpf;
     private String nome;
+
+    @Embedded
+    private Contato contato;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecoList = new ArrayList<>();
@@ -43,6 +48,14 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
     public List<Endereco> getEnderecoList() {
         return enderecoList;
     }
@@ -52,6 +65,7 @@ public class Cliente {
         return "Cliente{" +
                 "cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
+                ", contato=" + contato +
                 ", enderecoList=" + enderecoList +
                 '}';
     }

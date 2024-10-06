@@ -1,6 +1,5 @@
 package br.com.rasmoo.restaurante.service.teste;
 
-import br.com.rasmoo.restaurante.dao.CardapioDao;
 import br.com.rasmoo.restaurante.dao.ClienteDao;
 import br.com.rasmoo.restaurante.dao.EnderecoDao;
 import br.com.rasmoo.restaurante.dao.OrdemDao;
@@ -20,17 +19,17 @@ public class OrdemService {
         CargaDeDadosUtil.cadastrarCliente(entityManager);
         CargaDeDadosUtil.cadastrarPedido(entityManager);
 
-
         OrdemDao ordemDao = new OrdemDao(entityManager);
 
         Ordem ordem = ordemDao.joinFetchCliente(1);
         ClienteDao clienteDao = new ClienteDao(entityManager);
-        //System.out.println(ordemDao.consultarMaisVendidos());
-        //System.out.println(clienteDao.consultarTodos());
+
         EnderecoDao enderecoDao = new EnderecoDao(entityManager);
-        System.out.println(enderecoDao.consultaDinamica("Rio grande", "Irecê", "Bahia"));
+        //System.out.println(enderecoDao.consultaDinamica("Rua das árvores", null, null));
+        //System.out.println(enderecoDao.consultaDinamicaUsandoCriteria("Rua das árvores", null, null));
+        System.out.println(clienteDao.consultarTodos());
         entityManager.getTransaction().commit();
         entityManager.close();
-        //System.out.println(ordem.getCliente().getNome());
+        //System.out.println(ordem.getCliente().getNome()); // chamada explícita a Lazy table
     }
 }

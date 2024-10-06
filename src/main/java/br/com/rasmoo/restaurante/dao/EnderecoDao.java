@@ -5,7 +5,13 @@ import br.com.rasmoo.restaurante.vo.ClienteVo;
 import br.com.rasmoo.restaurante.vo.EnderecoVo;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Objects;
 
 public class EnderecoDao {
 
@@ -29,11 +35,59 @@ public class EnderecoDao {
     public List<ClienteVo> consultaDinamica(final String rua, final String cidade, final String estado) {
 
         String jpql = "SELECT new br.com.rasmoo.restaurante.vo.ClienteVo(e.cliente.cpf, e.cliente.nome) " +
-                "FROM Endereco e WHERE UPPER(e.rua) = UPPER(:rua) AND " +
-                "UPPER(e.cidade) = UPPER(:cidade) AND UPPER(e.estado) = UPPER(:estado)";
+                "FROM Endereco e WHERE 1=1";
 
-        return this.entityManager.createQuery(jpql, ClienteVo.class).setParameter("rua", rua)
-                .setParameter("cidade", cidade).setParameter("estado", estado)
-                .getResultList();
+        if(Objects.nonNull(rua)) {
+            jpql = jpql.concat(" AND UPPER(e.rua) = UPPER(:rua)");
+        }
+
+        if(Objects.nonNull(cidade)) {
+            jpql = jpql.concat(" AND UPPER(e.cidade) = UPPER(:cidade)");
+        }
+
+        if(Objects.nonNull(estado)) {
+            jpql = jpql.concat(" AND UPPER(e.estado) = UPPER(:estado)");
+        }
+
+        TypedQuery typedQuery = this.entityManager.createQuery(jpql, ClienteVo.class);
+
+        if(Objects.nonNull(rua)) {
+            typedQuery = typedQuery.setParameter("rua", rua);
+        }
+
+        if(Objects.nonNull(cidade)) {
+            typedQuery = typedQuery.setParameter("cidade", cidade);
+        }
+
+        if(Objects.nonNull(estado)) {
+            typedQuery = typedQuery.setParameter("estado", estado);
+        }
+
+        return typedQuery.getResultList();
+    }
+
+    public List<ClienteVo> consultaDinamicaUsandoCriteria(String rua, String cidade, String estado) {
+
+        CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<ClienteVo> criteriaQuery = builder.createQuery(ClienteVo.class);
+        Root<Endereco> root = criteriaQuery.from(Endereco.class);
+        criteriaQuery.multiselect(root.get("cliente").get("cpf"), root.get("cliente").get("nome"));
+        Predicate predicate = builder.and();
+
+        if(Objects.nonNull(rua)) {
+            predicate = builder.and(predicate, builder.equal(root.get("rua"), rua));
+        }
+
+        if(Objects.nonNull(cidade)) {
+            predicate = builder.and(builder.equal(root.get("cidade"), cidade));
+        }
+
+        if(Objects.nonNull(estado)) {
+            predicate = builder.and(builder.equal(root.get("estado"), estado));
+        }
+
+        criteriaQuery.where(predicate);
+
+        return this.entityManager.createQuery(criteriaQuery).getResultList();
     }
 }
