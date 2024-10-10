@@ -34,7 +34,7 @@ public class EnderecoDao {
 
     public List<ClienteVo> consultaDinamica(final String rua, final String cidade, final String estado) {
 
-        String jpql = "SELECT new br.com.rasmoo.restaurante.vo.ClienteVo(e.cliente.cpf, e.cliente.nome) " +
+        String jpql = "SELECT new br.com.rasmoo.restaurante.vo.ClienteVo(e.cliente.clienteId.cpf, e.cliente.nome) " +
                 "FROM Endereco e WHERE 1=1";
 
         if(Objects.nonNull(rua)) {
@@ -71,7 +71,7 @@ public class EnderecoDao {
         CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<ClienteVo> criteriaQuery = builder.createQuery(ClienteVo.class);
         Root<Endereco> root = criteriaQuery.from(Endereco.class);
-        criteriaQuery.multiselect(root.get("cliente").get("cpf"), root.get("cliente").get("nome"));
+        criteriaQuery.multiselect(root.get("cliente").get("clienteId").get("cpf"), root.get("cliente").get("nome"));
         Predicate predicate = builder.and();
 
         if(Objects.nonNull(rua)) {

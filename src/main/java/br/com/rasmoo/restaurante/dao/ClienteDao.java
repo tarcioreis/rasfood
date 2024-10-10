@@ -1,5 +1,6 @@
 package br.com.rasmoo.restaurante.dao;
 
+import br.com.rasmoo.restaurante.embeddable.ClienteId;
 import br.com.rasmoo.restaurante.entity.Cliente;
 
 import javax.persistence.EntityManager;
@@ -17,8 +18,8 @@ public class ClienteDao {
         this.entityManager.persist(cliente);
     }
 
-    public Cliente consultarPorCpfId(String cpf) {
-        return this.entityManager.find(Cliente.class, cpf);
+    public Cliente consultarPorCpfId(ClienteId id) {
+        return this.entityManager.find(Cliente.class, id);
     }
 
     public List<Cliente> consultarTodos() {

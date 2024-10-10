@@ -1,5 +1,6 @@
 package br.com.rasmoo.restaurante.entity;
 
+import br.com.rasmoo.restaurante.embeddable.ClienteId;
 import br.com.rasmoo.restaurante.embeddable.Contato;
 
 import javax.persistence.*;
@@ -10,8 +11,9 @@ import java.util.List;
 @Table(name = "clientes")
 public class Cliente {
 
-    @Id
-    private String cpf;
+    @EmbeddedId
+    private ClienteId clienteId;
+
     private String nome;
 
     @Embedded
@@ -22,8 +24,8 @@ public class Cliente {
 
     public Cliente() {}
 
-    public Cliente(String cpf, String nome) {
-        this.cpf = cpf;
+    public Cliente(String email, String cpf, String nome) {
+        this.clienteId = new ClienteId(email, cpf);
         this.nome = nome;
     }
 
@@ -33,11 +35,11 @@ public class Cliente {
     }
 
     public String getCpf() {
-        return cpf;
+        return this.clienteId.getCpf();
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.clienteId.setCpf(cpf);
     }
 
     public String getNome() {
@@ -63,7 +65,7 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "cpf='" + cpf + '\'' +
+                "clienteId=" + clienteId +
                 ", nome='" + nome + '\'' +
                 ", contato=" + contato +
                 ", enderecoList=" + enderecoList +

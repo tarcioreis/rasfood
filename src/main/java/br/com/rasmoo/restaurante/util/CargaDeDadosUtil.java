@@ -4,6 +4,7 @@ import br.com.rasmoo.restaurante.dao.CardapioDao;
 import br.com.rasmoo.restaurante.dao.CategoriaDao;
 import br.com.rasmoo.restaurante.dao.ClienteDao;
 import br.com.rasmoo.restaurante.dao.OrdemDao;
+import br.com.rasmoo.restaurante.embeddable.ClienteId;
 import br.com.rasmoo.restaurante.entity.*;
 
 import javax.persistence.Entity;
@@ -80,19 +81,19 @@ public class CargaDeDadosUtil {
 
     public static void cadastrarCliente(EntityManager entityManager) {
 
-        Cliente tarcio = new Cliente("12345678900", "Tarcio Souza Reis");
+        Cliente tarcio = new Cliente("tarcioreis@gmail.com", "12345678900", "Tarcio Souza Reis");
         tarcio.addEnderecosCliente(new Endereco("Rio grande", "Igreja presbiteriana",
                 "000000", "Irecê", "Bahia"));
 
-        Cliente pedro = new Cliente("321456987", "Pedro da Silva");
+        Cliente pedro = new Cliente("pedro@gmail.com","321456987", "Pedro da Silva");
         pedro.addEnderecosCliente(new Endereco("Rua da delegacia", "complemento",
                 "1234556", "Campinas","São Paulo"));
 
-        Cliente vanessa = new Cliente("098765364", "Vanessa Lima Santos");
+        Cliente vanessa = new Cliente("vanessa@gmail.com","098765364", "Vanessa Lima Santos");
         vanessa.addEnderecosCliente(new Endereco("Rua das árvores", "Praça da cidade",
                 "987455", "Belo Horizonte","Minas Gerais"));
 
-        Cliente mariana = new Cliente("789139740", "Mariana Lima Santos");
+        Cliente mariana = new Cliente("mariana@gmail.com", "789139740", "Mariana Lima Santos");
         mariana.addEnderecosCliente(new Endereco("Rua das árvores", "Praça da cidade",
                 "987455", "Timoteo", "Minas Gerais"));
 
@@ -110,17 +111,18 @@ public class CargaDeDadosUtil {
         CardapioDao cardapioDao = new CardapioDao(entityManager);
         ClienteDao clienteDao = new ClienteDao(entityManager);
         OrdemDao ordemDao = new OrdemDao(entityManager);
+        List<Cliente> clientes = clienteDao.consultarTodos();
 
-        Ordem pedido = new Ordem(clienteDao.consultarPorCpfId("12345678900"));
+        Ordem pedido = new Ordem(clientes.get(0));
         pedido.addOrdensCardapio(new OrdensCardapio(cardapioDao.consultarPorId(2), 3));
 
-        Ordem pedido2 = new Ordem(clienteDao.consultarPorCpfId("321456987"));
+        Ordem pedido2 = new Ordem(clientes.get(1));
         pedido2.addOrdensCardapio(new OrdensCardapio(cardapioDao.consultarPorId(3), 1));
 
-        Ordem pedido3 = new Ordem(clienteDao.consultarPorCpfId("098765364"));
+        Ordem pedido3 = new Ordem(clientes.get(2));
         pedido3.addOrdensCardapio(new OrdensCardapio(cardapioDao.consultarPorId(5), 2));
 
-        Ordem pedido4 = new Ordem(clienteDao.consultarPorCpfId("789139740"));
+        Ordem pedido4 = new Ordem(clientes.get(3));
         pedido4.addOrdensCardapio(new OrdensCardapio(cardapioDao.consultarPorId(4), 4));
 
         ordemDao.cadastrar(pedido);
